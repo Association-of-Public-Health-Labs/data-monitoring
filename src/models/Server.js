@@ -12,11 +12,13 @@ class Server extends Model {
         created_at: DataTypes.DATE,
         updated_at: DataTypes.DATE,
       },
-      { sequelize, timestamps: false, underscored: true }
+      { sequelize, timestamps: true, underscored: true }
     );
   }
 
-  static associate(models) {}
+  static associate(models) {
+    this.hasMany(models.Data, { foreignKey: "server_id", as: "data" });
+  }
 }
 
 module.exports = Server;
