@@ -19,6 +19,7 @@ module.exports = {
           onDelete: "CASCADE",
         },
       },
+      report_date: Sequelize.DATE,
       disalab_total_records: Sequelize.INTEGER,
       openldr_total_records: Sequelize.INTEGER,
       created_at: {

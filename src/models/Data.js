@@ -7,11 +7,19 @@ class Data extends Model {
         report_date: DataTypes.DATE,
         disalab_total_records: DataTypes.INTEGER,
         openldr_total_records: DataTypes.INTEGER,
+        created_at: {
+          type: DataTypes.DATE,
+          defaultValue: DataTypes.NOW,
+        },
+        updated_at: {
+          type: DataTypes.DATE,
+          defaultValue: DataTypes.NOW,
+        },
       },
       {
         sequelize,
         underscored: true,
-        timestamps: true,
+        timestamps: false,
         tableName: "data",
       }
     );

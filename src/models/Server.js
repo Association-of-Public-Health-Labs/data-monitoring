@@ -9,10 +9,16 @@ class Server extends Model {
         category: DataTypes.STRING,
         cpu: DataTypes.FLOAT,
         ram: DataTypes.FLOAT,
-        created_at: DataTypes.DATE,
-        updated_at: DataTypes.DATE,
+        created_at: {
+          type: DataTypes.DATE,
+          defaultValue: DataTypes.NOW,
+        },
+        updated_at: {
+          type: DataTypes.DATE,
+          defaultValue: DataTypes.NOW,
+        },
       },
-      { sequelize, timestamps: true, underscored: true }
+      { sequelize, timestamps: false, underscored: true }
     );
   }
 
