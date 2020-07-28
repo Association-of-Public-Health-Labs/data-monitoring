@@ -1,6 +1,5 @@
 const Server = require("../models/Server");
 const Data = require("../models/Data");
-const { update } = require("../models/Server");
 
 module.exports = {
   async store(req, res) {
@@ -34,6 +33,16 @@ module.exports = {
       }
     );
 
+    return res.json(server);
+  },
+
+  async delete(req, res) {
+    const { server_id } = req.params;
+    const server = await Server.destroy({
+      where: {
+        id: server_id,
+      },
+    });
     return res.json(server);
   },
 };

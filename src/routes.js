@@ -10,6 +10,7 @@ routes.post("/servers", ServerController.store);
 routes.get("/servers/:id", ServerController.index);
 routes.get("/servers", ServerController.showAll);
 routes.put("/servers/:server_id", ServerController.update);
+routes.delete("/servers/:server_id", ServerController.delete);
 
 // Data routes
 routes.post("/servers/:server_id/data", DataController.store);
