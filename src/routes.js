@@ -14,5 +14,6 @@ routes.put("/servers/:server_id", ServerController.update);
 // Data routes
 routes.post("/servers/:server_id/data", DataController.store);
 routes.get("/servers/:server_id/data", DataController.showAllByLab);
+routes.put("/servers/:server_id/data/:report_date", DataController.update);
 
 module.exports = routes;
