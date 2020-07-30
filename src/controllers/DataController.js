@@ -46,7 +46,6 @@ module.exports = {
         report_date: report_date,
       },
     });
-
     return res.json(data);
   },
 };
