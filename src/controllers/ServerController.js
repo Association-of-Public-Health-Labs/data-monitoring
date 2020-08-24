@@ -1,5 +1,6 @@
 const Server = require("../models/Server");
 const Data = require("../models/Data");
+const { upsert } = require("../models/Server");
 
 module.exports = {
   async store(req, res) {
@@ -34,6 +35,28 @@ module.exports = {
     );
 
     return res.json(server);
+  },
+
+  async upsert(req, res) {
+    const { server_id } = req.params;
+    const { name, category, cpu, ram } = req.body;
+
+    var server = await Server.findByPk(server_id);
+
+    if (!server) {
+      server = await Server.create({ id: server_id, name, category, cpu, ram });
+    }
+
+    const server_updated = await Server.update(
+      { cpu: cpu, ram: ram, name: name, category: category },
+      {
+        where: {
+          id: server_id,
+        },
+      }
+    );
+
+    return res.json(server_updated);
   },
 
   async delete(req, res) {
