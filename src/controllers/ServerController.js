@@ -5,7 +5,15 @@ const { upsert } = require("../models/Server");
 module.exports = {
   async store(req, res) {
     const { id, name, category, cpu, ram } = req.body;
-    const server = await Server.create({ id, name, category, cpu, ram });
+
+    var server = await Server.findByPk(id);
+    console.log(cpu);
+
+    if (server) {
+      return res.json({ error: "This server exists" });
+    }
+
+    server = await Server.create({ id, name, category, cpu, ram });
 
     return res.json(server);
   },

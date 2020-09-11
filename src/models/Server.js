@@ -7,8 +7,9 @@ class Server extends Model {
         id: { type: DataTypes.STRING, primaryKey: true },
         name: DataTypes.STRING,
         category: DataTypes.STRING,
-        cpu: DataTypes.FLOAT,
+        cpu: DataTypes.STRING,
         ram: DataTypes.FLOAT,
+        disk_storage: DataTypes.FLOAT,
         created_at: {
           type: DataTypes.DATE,
           defaultValue: DataTypes.NOW,

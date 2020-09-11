@@ -6,6 +6,13 @@ module.exports = {
 
     io.on("connection", function (socket) {
       console.log(socket.id);
+      socket.on("osinfo", function (socket) {
+        console.log(socket);
+      });
     });
+
+    // io.on("cpu_usage", function (socket) {
+    //   console.log(socket);
+    // });
   },
 };
