@@ -7,7 +7,7 @@ module.exports = {
     const { id, name, category, cpu, ram } = req.body;
 
     var server = await Server.findByPk(id);
-    console.log(cpu);
+    console.log("Server ID: ", id);
 
     if (server) {
       return res.json({ error: "This server exists" });
@@ -32,9 +32,15 @@ module.exports = {
 
   async update(req, res) {
     const { server_id } = req.params;
-    const { cpu, ram, category, name } = req.body;
+    const { cpu, ram, category, name, disk_storage } = req.body;
     const server = await Server.update(
-      { cpu: cpu, ram: ram, name: name, category: category },
+      {
+        cpu: cpu,
+        ram: ram,
+        name: name,
+        category: category,
+        disk_storage: disk_storage,
+      },
       {
         where: {
           id: server_id,
@@ -47,16 +53,29 @@ module.exports = {
 
   async upsert(req, res) {
     const { server_id } = req.params;
-    const { name, category, cpu, ram } = req.body;
+    const { name, category, cpu, ram, disk_storage } = req.body;
 
     var server = await Server.findByPk(server_id);
 
     if (!server) {
-      server = await Server.create({ id: server_id, name, category, cpu, ram });
+      server = await Server.create({
+        id: server_id,
+        name,
+        category,
+        cpu,
+        ram,
+        disk_storage,
+      });
     }
 
     const server_updated = await Server.update(
-      { cpu: cpu, ram: ram, name: name, category: category },
+      {
+        cpu: cpu,
+        ram: ram,
+        name: name,
+        category: category,
+        disk_storage: disk_storage,
+      },
       {
         where: {
           id: server_id,
