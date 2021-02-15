@@ -9,6 +9,8 @@ module.exports = {
       const connectedServers = [];
       const osinfo = [];
 
+      console.log(socket.id, server_id)
+
       if(server_id){
         connectedServers[server_id] = socket.id;
         io.emit("connectedServers", {
