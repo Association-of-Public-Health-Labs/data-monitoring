@@ -2,7 +2,14 @@ const socketio = require("socket.io");
 
 module.exports = {
   createWebSocketConnection(server) {
-    const io = socketio(server);
+    const io = socketio(server, {
+      cors: {
+        origin: true,
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
+      }
+    });
 
     io.on("connection", function (socket) {
       const {server_id} = socket;
