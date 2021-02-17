@@ -20,9 +20,15 @@ module.exports = {
 
       if (server_id) {
         connectedServers[server_id] = socket.id;
-        io.emit("connectedServers", {
-          connectedServers,
-          osinfo
+        // io.emit("connectedServers", {
+        //   connectedServers,
+        //   osinfo
+        // }) 
+        socket.on("connectedServer", srv => {
+          io.emit("connectedServers", {
+            connectedServers,
+            osinfo
+          }) 
         })
       }
 
