@@ -46,12 +46,17 @@ module.exports = {
 
       var interval = 1000;
 
-      setInterval(async function () {
-        io.emit("servers", {
-          connectedServers,
-          osinfo
-        })
-      }, interval);
+      // setInterval(async function () {
+      //   io.emit("servers", {
+      //     connectedServers,
+      //     osinfo
+      //   })
+      // }, interval);
+
+      io.emit("servers", {
+        connectedServers,
+        osinfo
+      })
 
     });
   },
