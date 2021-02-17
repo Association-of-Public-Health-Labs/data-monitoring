@@ -48,6 +48,9 @@ module.exports = {
           ram: server.ram,
           sqlagent: server.sqlagent,
         }
+        io.emit("os", {
+          osinfo
+        })
       });
 
       var interval = 1000;
