@@ -11,14 +11,14 @@ module.exports = {
       }
     });
 
-    io.on("connection", function (socket) {
-      const {server_id} = socket;
+    io.on("connection", async function (socket) {
+      const { server_id } = await socket.handshake.query
       const connectedServers = [];
       const osinfo = [];
 
       console.log(socket.id, server_id)
 
-      if(server_id){
+      if (server_id) {
         connectedServers[server_id] = socket.id;
         io.emit("connectedServers", {
           connectedServers,
