@@ -52,6 +52,11 @@ module.exports = {
           osinfo
         })
       }, interval);
+
+      io.emit("servers", {
+        connectedServers,
+        osinfo
+      })
     });
   },
 };
