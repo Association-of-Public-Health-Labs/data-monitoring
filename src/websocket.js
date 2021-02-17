@@ -28,7 +28,7 @@ module.exports = {
 
       socket.on("disconnect", socket => {
         connectedServers[server_id] = null;
-        osinfo[server.server_id] = null
+        osinfo[server_id] = null
         io.emit("connectedServers", {
           connectedServers,
           osinfo
