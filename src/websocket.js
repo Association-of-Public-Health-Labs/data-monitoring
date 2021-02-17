@@ -6,8 +6,8 @@ module.exports = {
       cors: {
         origin: true,
         methods: ["GET", "POST"],
-        // allowedHeaders: ["my-custom-header"],
-        // credentials: true
+        allowedHeaders: ["my-custom-header"],
+        credentials: true
       }
     });
 
