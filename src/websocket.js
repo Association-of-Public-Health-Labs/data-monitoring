@@ -18,6 +18,10 @@ module.exports = {
 
       console.log(socket.id, server_id)
 
+      io.emit("servers", {
+        servers: ["VP",'PDM']
+      })
+
       if (server_id) {
         connectedServers[server_id] = socket.id;
         io.emit("connectedServers", {
@@ -35,28 +39,24 @@ module.exports = {
         })
       })
 
-      socket.on("osinfo", function (server) {
-        osinfo[server.server_id] = {
-          server_id: server.server_id,
-          cpu: server.cpu,
-          ram: server.ram,
-          sqlagent: server.sqlagent,
-        }
-      });
+      // socket.on("osinfo", function (server) {
+      //   osinfo[server.server_id] = {
+      //     server_id: server.server_id,
+      //     cpu: server.cpu,
+      //     ram: server.ram,
+      //     sqlagent: server.sqlagent,
+      //   }
+      // });
 
       var interval = 1000;
 
-      setInterval(async function () {
-        io.emit("servers", {
-          connectedServers,
-          osinfo
-        })
-      }, interval);
+      // setInterval(async function () {
+      //   io.emit("servers", {
+      //     connectedServers,
+      //     osinfo
+      //   })
+      // }, interval);
 
-      io.emit("servers", {
-        connectedServers,
-        osinfo
-      })
     });
   },
 };
