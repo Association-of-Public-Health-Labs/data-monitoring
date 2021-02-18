@@ -35,7 +35,19 @@ module.exports = {
 
       socket.on("disconnect", async function(socket) {
         const servers = await jsonfile.readFileSync(file);
-        servers[server_id] = null
+        if(Object.keys(servers).length === 0){
+          // servers[server.server_id] = {
+          //   server_id: server.server_id,
+          //   server_name:  server.server_name,
+          //   server_category: server.server_category,
+          //   cpu: server.cpu,
+          //   ram: server.ram,
+          //   sqlagent: server.sqlagent,
+          //   isConnected: false,
+          //   isDisacommsOn: server.isDisacommsOn,
+          //   updatedAt: updatedAt
+          // }
+        }
         jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
@@ -44,15 +56,18 @@ module.exports = {
       socket.on("osinfo", async function (server) {
         const servers = await jsonfile.readFileSync(file);
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
-        servers[server.server_id] = {
-          server_id: server.server_id,
-          server_name:  server.server_name,
-          server_category: server.server_category,
-          cpu: server.cpu,
-          ram: server.ram,
-          sqlagent: server.sqlagent,
-          isDisacommsOn: server.isDisacommsOn,
-          updatedAt: updatedAt
+        if(Object.keys(servers).length === 0){
+          servers[server.server_id] = {
+            server_id: server.server_id,
+            server_name:  server.server_name,
+            server_category: server.server_category,
+            cpu: server.cpu,
+            ram: server.ram,
+            sqlagent: server.sqlagent,
+            isConnected: true,
+            isDisacommsOn: server.isDisacommsOn,
+            updatedAt: updatedAt
+          }
         }
         console.log(servers);
         jsonfile.writeFile(file, servers, function (err) {
