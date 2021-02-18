@@ -51,12 +51,18 @@ module.exports = {
 
       socket.on("osinfo", async function (server) {
         const servers = await jsonfile.readFileSync(file);
-        osinfo.push({
-            server_id: server.server_id,
-            cpu: server.cpu,
-            ram: server.ram,
-            sqlagent: server.sqlagent,
-        })
+        // osinfo.push({
+        //     server_id: server.server_id,
+        //     cpu: server.cpu,
+        //     ram: server.ram,
+        //     sqlagent: server.sqlagent,
+        // })
+        servers[server.server_id] = {
+          server_id: server.server_id,
+          cpu: server.cpu,
+          ram: server.ram,
+          sqlagent: server.sqlagent,
+        }
         console.log(servers);
 
         // fs.writeFile("hosts.json", JSON.stringify([{
@@ -67,6 +73,9 @@ module.exports = {
         // }], null, 2), error => {
         //   if(error) throw new Error('something went wrong!')
         // })
+        jsonfile.writeFile(file, servers, function (err) {
+          if (err) console.error(err)
+        })
   
         // io.emit("os", {
         //   osinfo
