@@ -21,18 +21,10 @@ module.exports = {
       const connectedServers = [];
       const osinfo = [];
 
-      // fs.writeFile("hosts.json", JSON.stringify([{server_id: server_id}], null, 2), error => {
-      //   if(error) throw new Error('something went wrong!')
-      // })
-
       console.log(socket.id, server_id)
 
       if (server_id) {
         connectedServers[server_id] = socket.id;
-        // io.emit("connectedServers", {
-        //   connectedServers,
-        //   osinfo
-        // }) 
         socket.on("connectedServer", srv => {
           io.emit("connectedServers", {
             connectedServers,
@@ -57,6 +49,7 @@ module.exports = {
           cpu: server.cpu,
           ram: server.ram,
           sqlagent: server.sqlagent,
+          isDisacommsOn: server.isDisacommsOn,
           updatedAt: updatedAt
         }
         console.log(servers);
