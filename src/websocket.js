@@ -1,4 +1,5 @@
 const socketio = require("socket.io");
+const fs = require("fs");
 
 module.exports = {
   createWebSocketConnection(server) {
@@ -15,6 +16,10 @@ module.exports = {
       const { server_id } = await socket.handshake.query
       const connectedServers = [];
       const osinfo = [];
+
+      fs.writeFile("hosts.json", JSON.stringify([{server_id: server_id}], null, 2), error => {
+        if(error) throw new Error('something went wrong!')
+      })
 
       console.log(socket.id, server_id)
 
@@ -48,9 +53,9 @@ module.exports = {
           ram: server.ram,
           sqlagent: server.sqlagent,
         }
-        io.emit("os", {
-          osinfo
-        })
+        // io.emit("os", {
+        //   osinfo
+        // })
       });
 
       var interval = 1000;
