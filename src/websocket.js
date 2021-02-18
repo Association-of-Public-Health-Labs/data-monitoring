@@ -1,5 +1,8 @@
 const socketio = require("socket.io");
 const fs = require("fs");
+const jsonfile = require("jsonfile");
+
+const file = "/hosts.json";
 
 module.exports = {
   createWebSocketConnection(server) {
@@ -46,19 +49,15 @@ module.exports = {
         })
       })
 
-      socket.on("osinfo", function (server) {
-        // osinfo[server.server_id] = {
-        //   server_id: server.server_id,
-        //   cpu: server.cpu,
-        //   ram: server.ram,
-        //   sqlagent: server.sqlagent,
-        // }
+      socket.on("osinfo", async function (server) {
+        const servers = await jsonfile.readFileSync(file);
         osinfo.push({
             server_id: server.server_id,
             cpu: server.cpu,
             ram: server.ram,
             sqlagent: server.sqlagent,
         })
+        console.log(servers);
 
         // fs.writeFile("hosts.json", JSON.stringify([{
         //   server_id: server.server_id,
