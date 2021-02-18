@@ -13,7 +13,7 @@ routes.get("/servers", ServerController.showAll);
 routes.put("/servers/:server_id", ServerController.update);
 routes.delete("/servers/:server_id", ServerController.delete);
 routes.post("/servers/:server_id", ServerController.upsert);
-routes.get("/servers/status", ServerController.showAllServers)
+routes.get("/status", ServerController.showAllServers)
 
 // Data routes
 routes.post("/servers/:server_id/data", DataController.store);
