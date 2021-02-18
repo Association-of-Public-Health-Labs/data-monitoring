@@ -3,8 +3,8 @@ const Data = require("../models/Data");
 const { upsert } = require("../models/Server");
 
 const jsonfile = require("jsonfile")
+const path = require("path")
 
-const file = "../hosts.json";
 
 module.exports = {
   async store(req, res) {
@@ -101,6 +101,7 @@ module.exports = {
   },
 
   async showAllServers(req, res) {
+    const file = path.resolve(__dirname,"..","hosts.json");
     const servers = await jsonfile.readFileSync(file);
     return res.json(servers)
   }
