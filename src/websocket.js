@@ -1,6 +1,7 @@
 const socketio = require("socket.io");
 const fs = require("fs");
 const jsonfile = require("jsonfile");
+const moment = require("moment");
 
 const file = "hosts.json";
 
@@ -55,7 +56,7 @@ module.exports = {
           cpu: server.cpu,
           ram: server.ram,
           sqlagent: server.sqlagent,
-          updatedAt: new Date()
+          updatedAt: moment()
         }
         console.log(servers);
         jsonfile.writeFile(file, servers, function (err) {
