@@ -34,7 +34,7 @@ module.exports = {
       }
 
       socket.on("disconnect", async function(socket) {
-        const servers = await jsonfile.readFileSync(file);
+        const servers = await fs.readFileSync(file);
         if(Object.keys(servers).length === 0){
           // servers[server.server_id] = {
           //   server_id: server.server_id,
@@ -48,15 +48,15 @@ module.exports = {
           //   updatedAt: updatedAt
           // }
         }
-        jsonfile.writeFile(file, servers, function (err) {
+        fs.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
           if (err) console.error(err)
         })
       })
 
       socket.on("osinfo", async function (server) {
-        const servers = await jsonfile.readFileSync(file);
+        const servers = await fs.readFileSync(file);
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
-        if(Object.keys(servers).length !== 0){
+        // if(Object.keys(servers).length !== 0){
           servers[server.server_id] = {
             server_id: server.server_id,
             server_name:  server.server_name,
@@ -68,9 +68,9 @@ module.exports = {
             isDisacommsOn: server.isDisacommsOn,
             updatedAt: updatedAt
           }
-        }
+        // }
         console.log(servers);
-        jsonfile.writeFile(file, servers, function (err) {
+        fs.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
           if (err) console.error(err)
         })
       });
