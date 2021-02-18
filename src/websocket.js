@@ -51,12 +51,13 @@ module.exports = {
 
       socket.on("osinfo", async function (server) {
         const servers = await jsonfile.readFileSync(file);
+        var updatedAt = new Date();
         servers[server.server_id] = {
           server_id: server.server_id,
           cpu: server.cpu,
           ram: server.ram,
           sqlagent: server.sqlagent,
-          updatedAt: String(new Date)
+          updatedAt: updatedAt
         }
         console.log(servers);
         jsonfile.writeFile(file, servers, function (err) {
