@@ -2,6 +2,10 @@ const Server = require("../models/Server");
 const Data = require("../models/Data");
 const { upsert } = require("../models/Server");
 
+const jsonfile = require("jsonfile")
+
+const file = "../hosts.json";
+
 module.exports = {
   async store(req, res) {
     const { id, name, category, cpu, ram } = req.body;
@@ -95,4 +99,9 @@ module.exports = {
     });
     return res.json(server);
   },
+
+  async showAllServers(req, res) {
+    const servers = await jsonfile.readFileSync(file);
+    return res.json(servers)
+  }
 };

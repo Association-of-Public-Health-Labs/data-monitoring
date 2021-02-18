@@ -60,14 +60,14 @@ module.exports = {
         })
       });
 
-      var interval = 1000;
+      // var interval = 1000;
 
-      setInterval(async function () {
-        const servers = await jsonfile.readFileSync(file);
-        io.emit("servers", {
-          servers,
-        })
-      }, interval);
+      // setInterval(async function () {
+      //   const servers = await jsonfile.readFileSync(file);
+      //   io.emit("servers", {
+      //     servers,
+      //   })
+      // }, interval);
 
 
     });
