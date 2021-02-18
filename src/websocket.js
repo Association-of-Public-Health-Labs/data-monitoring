@@ -34,29 +34,29 @@ module.exports = {
       }
 
       socket.on("disconnect", async function(socket) {
-        const servers = await fs.readFileSync(file);
-        if(Object.keys(servers).length === 0){
-          // servers[server.server_id] = {
-          //   server_id: server.server_id,
-          //   server_name:  server.server_name,
-          //   server_category: server.server_category,
-          //   cpu: server.cpu,
-          //   ram: server.ram,
-          //   sqlagent: server.sqlagent,
-          //   isConnected: false,
-          //   isDisacommsOn: server.isDisacommsOn,
-          //   updatedAt: updatedAt
-          // }
+        const servers = await jsonfile.readFileSync(file);
+        if(Object.keys(servers).length !== 0){
+          servers[server.server_id] = {
+            server_id: server.server_id,
+            server_name:  server.server_name,
+            server_category: server.server_category,
+            cpu: server.cpu,
+            ram: server.ram,
+            sqlagent: server.sqlagent,
+            isConnected: false,
+            isDisacommsOn: server.isDisacommsOn,
+            updatedAt: updatedAt
+          }
         }
-        fs.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
+        jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
       })
 
       socket.on("osinfo", async function (server) {
-        const servers = JSON.parse(await fs.readFileSync(file));
+        const servers = await jsonfile.readFileSync(file);
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
-        // if(Object.keys(servers).length !== 0){
+        if(Object.keys(servers).length !== 0){
           servers[server.server_id] = {
             server_id: server.server_id,
             server_name:  server.server_name,
@@ -68,9 +68,9 @@ module.exports = {
             isDisacommsOn: server.isDisacommsOn,
             updatedAt: updatedAt
           }
-        // }
+        }
         console.log(servers);
-        fs.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
+        jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
       });
