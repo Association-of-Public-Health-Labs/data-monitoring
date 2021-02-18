@@ -47,21 +47,27 @@ module.exports = {
       })
 
       socket.on("osinfo", function (server) {
-        osinfo[server.server_id] = {
-          server_id: server.server_id,
-          cpu: server.cpu,
-          ram: server.ram,
-          sqlagent: server.sqlagent,
-        }
-
-        fs.writeFile("hosts.json", JSON.stringify([{
-          server_id: server.server_id,
-          cpu: server.cpu,
-          ram: server.ram,
-          sqlagent: server.sqlagent,
-        }], null, 2), error => {
-          if(error) throw new Error('something went wrong!')
+        // osinfo[server.server_id] = {
+        //   server_id: server.server_id,
+        //   cpu: server.cpu,
+        //   ram: server.ram,
+        //   sqlagent: server.sqlagent,
+        // }
+        osinfo.push({
+            server_id: server.server_id,
+            cpu: server.cpu,
+            ram: server.ram,
+            sqlagent: server.sqlagent,
         })
+
+        // fs.writeFile("hosts.json", JSON.stringify([{
+        //   server_id: server.server_id,
+        //   cpu: server.cpu,
+        //   ram: server.ram,
+        //   sqlagent: server.sqlagent,
+        // }], null, 2), error => {
+        //   if(error) throw new Error('something went wrong!')
+        // })
   
         // io.emit("os", {
         //   osinfo
