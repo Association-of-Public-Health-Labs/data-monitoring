@@ -2,7 +2,7 @@ const socketio = require("socket.io");
 const fs = require("fs");
 const jsonfile = require("jsonfile");
 
-const file = "/hosts.json";
+const file = "../hosts.json";
 
 module.exports = {
   createWebSocketConnection(server) {
