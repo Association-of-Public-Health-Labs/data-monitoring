@@ -41,11 +41,10 @@ module.exports = {
       }
 
       socket.on("disconnect", socket => {
-        connectedServers[server_id] = null;
-        osinfo[server_id] = null
-        io.emit("connectedServers", {
-          connectedServers,
-          osinfo
+        const servers = await jsonfile.readFileSync(file);
+        servers[server_id] = null
+        jsonfile.writeFile(file, servers, function (err) {
+          if (err) console.error(err)
         })
       })
 
@@ -56,15 +55,12 @@ module.exports = {
           cpu: server.cpu,
           ram: server.ram,
           sqlagent: server.sqlagent,
+          updatedAt: new Date()
         }
         console.log(servers);
         jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
-  
-        // io.emit("os", {
-        //   osinfo
-        // })
       });
 
       var interval = 1000;
