@@ -4,7 +4,7 @@ const { upsert } = require("../models/Server");
 
 const jsonfile = require("jsonfile")
 
-const file = "../hosts.json";
+const file = "/src/hosts.json";
 
 module.exports = {
   async store(req, res) {
