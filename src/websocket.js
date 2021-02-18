@@ -54,7 +54,7 @@ module.exports = {
       })
 
       socket.on("osinfo", async function (server) {
-        const servers = await fs.readFileSync(file);
+        const servers = JSON.parse(await fs.readFileSync(file));
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
         // if(Object.keys(servers).length !== 0){
           servers[server.server_id] = {
