@@ -41,7 +41,7 @@ module.exports = {
         })
       }
 
-      socket.on("disconnect", socket => {
+      socket.on("disconnect", async function(socket) {
         const servers = await jsonfile.readFileSync(file);
         servers[server_id] = null
         jsonfile.writeFile(file, servers, function (err) {
