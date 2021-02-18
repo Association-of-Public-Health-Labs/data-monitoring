@@ -51,12 +51,6 @@ module.exports = {
 
       socket.on("osinfo", async function (server) {
         const servers = await jsonfile.readFileSync(file);
-        // osinfo.push({
-        //     server_id: server.server_id,
-        //     cpu: server.cpu,
-        //     ram: server.ram,
-        //     sqlagent: server.sqlagent,
-        // })
         servers[server.server_id] = {
           server_id: server.server_id,
           cpu: server.cpu,
@@ -64,15 +58,6 @@ module.exports = {
           sqlagent: server.sqlagent,
         }
         console.log(servers);
-
-        // fs.writeFile("hosts.json", JSON.stringify([{
-        //   server_id: server.server_id,
-        //   cpu: server.cpu,
-        //   ram: server.ram,
-        //   sqlagent: server.sqlagent,
-        // }], null, 2), error => {
-        //   if(error) throw new Error('something went wrong!')
-        // })
         jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
@@ -84,17 +69,13 @@ module.exports = {
 
       var interval = 1000;
 
-      // setInterval(async function () {
-      //   io.emit("servers", {
-      //     connectedServers,
-      //     osinfo
-      //   })
-      // }, interval);
+      setInterval(async function () {
+        const servers = await jsonfile.readFileSync(file);
+        io.emit("servers", {
+          servers,
+        })
+      }, interval);
 
-      io.emit("servers", {
-        connectedServers,
-        osinfo
-      })
 
     });
   },
