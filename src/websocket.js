@@ -46,6 +46,8 @@ module.exports = {
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
         servers[server.server_id] = {
           server_id: server.server_id,
+          server_name:  server.server_name,
+          server_category: server.server_category,
           cpu: server.cpu,
           ram: server.ram,
           sqlagent: server.sqlagent,
