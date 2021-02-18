@@ -56,7 +56,7 @@ module.exports = {
           cpu: server.cpu,
           ram: server.ram,
           sqlagent: server.sqlagent,
-          updatedAt: moment()
+          updatedAt: moment().toString()
         }
         console.log(servers);
         jsonfile.writeFile(file, servers, function (err) {
