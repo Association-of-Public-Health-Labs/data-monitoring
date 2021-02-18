@@ -17,9 +17,9 @@ module.exports = {
       const connectedServers = [];
       const osinfo = [];
 
-      fs.writeFile("hosts.json", JSON.stringify([{server_id: server_id}], null, 2), error => {
-        if(error) throw new Error('something went wrong!')
-      })
+      // fs.writeFile("hosts.json", JSON.stringify([{server_id: server_id}], null, 2), error => {
+      //   if(error) throw new Error('something went wrong!')
+      // })
 
       console.log(socket.id, server_id)
 
@@ -53,6 +53,16 @@ module.exports = {
           ram: server.ram,
           sqlagent: server.sqlagent,
         }
+
+        fs.writeFile("hosts.json", JSON.stringify([{
+          server_id: server.server_id,
+          cpu: server.cpu,
+          ram: server.ram,
+          sqlagent: server.sqlagent,
+        }], null, 2), error => {
+          if(error) throw new Error('something went wrong!')
+        })
+  
         // io.emit("os", {
         //   osinfo
         // })
