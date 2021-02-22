@@ -56,33 +56,44 @@ module.exports = {
       socket.on("osinfo", async function (server) {
         const servers = await jsonfile.readFileSync(file);
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
+        servers[server.server_id] = {
+          server_id: server.server_id,
+          server_name:  server.server_name,
+          server_category: server.server_category,
+          cpu: server.cpu,
+          ram: server.ram,
+          sqlagent: server.sqlagent,
+          isConnected: true,
+          isDisacommsOn: server.isDisacommsOn,
+          updatedAt: updatedAt
+        }
         // if(Object.keys(servers).length !== 0){
-          if(servers[server.server_id]){
-            servers[server.server_id] = {
-              server_id: server.server_id,
-              server_name:  server.server_name,
-              server_category: server.server_category,
-              cpu: server.cpu,
-              ram: server.ram,
-              sqlagent: server.sqlagent,
-              isConnected: true,
-              isDisacommsOn: server.isDisacommsOn,
-              updatedAt: updatedAt
-            }
-            jsonfile.writeFile(file, servers, function (err) {
-              if (err) console.error(err)
-            })
-          }
-          else {
-            jsonfile.writeFile(file, servers, { flag: 'a' }, function (err) {
-              if (err) console.error(err)
-            })
-          }
+          // if(servers[server.server_id]){
+          //   servers[server.server_id] = {
+          //     server_id: server.server_id,
+          //     server_name:  server.server_name,
+          //     server_category: server.server_category,
+          //     cpu: server.cpu,
+          //     ram: server.ram,
+          //     sqlagent: server.sqlagent,
+          //     isConnected: true,
+          //     isDisacommsOn: server.isDisacommsOn,
+          //     updatedAt: updatedAt
+          //   }
+          //   jsonfile.writeFile(file, servers, function (err) {
+          //     if (err) console.error(err)
+          //   })
+          // }
+          // else {
+          //   jsonfile.writeFile(file, servers, { flag: 'a' }, function (err) {
+          //     if (err) console.error(err)
+          //   })
+          // }
         // }
         console.log(servers);
-        jsonfile.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
-          if (err) console.error(err)
-        })
+        // jsonfile.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
+        //   if (err) console.error(err)
+        // })
       });
 
       // var interval = 1000;
