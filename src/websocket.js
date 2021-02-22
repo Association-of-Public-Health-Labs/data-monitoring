@@ -90,7 +90,7 @@ module.exports = {
           //   })
           // }
         // }
-        console.log(servers);
+        console.log(servers, server);
         // jsonfile.writeFile(file, JSON.stringify(servers, null, 2), function (err) {
         //   if (err) console.error(err)
         // })
