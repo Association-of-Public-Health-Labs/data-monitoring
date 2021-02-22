@@ -34,23 +34,21 @@ module.exports = {
       }
 
       socket.on("disconnect", async function(socket) {
-        const servers = await jsonfile.readFileSync(file);
-        // if(Object.keys(servers).length !== 0){
-          servers[server.server_id] = {
-            server_id: server.server_id,
-            server_name:  server.server_name,
-            server_category: server.server_category,
-            cpu: server.cpu,
-            ram: server.ram,
-            sqlagent: server.sqlagent,
-            isConnected: false,
-            isDisacommsOn: server.isDisacommsOn,
-            updatedAt: updatedAt
-          }
+        // const servers = await jsonfile.readFileSync(file);
+        // servers[server.server_id] = {
+        //   server_id: server.server_id,
+        //   server_name:  server.server_name,
+        //   server_category: server.server_category,
+        //   cpu: server.cpu,
+        //   ram: server.ram,
+        //   sqlagent: server.sqlagent,
+        //   isConnected: false,
+        //   isDisacommsOn: server.isDisacommsOn,
+        //   updatedAt: updatedAt
         // }
-        jsonfile.writeFile(file, servers, function (err) {
-          if (err) console.error(err)
-        })
+        // jsonfile.writeFile(file, servers, function (err) {
+        //   if (err) console.error(err)
+        // })
       })
 
       socket.on("osinfo", async function (server) {
