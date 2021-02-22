@@ -68,7 +68,7 @@ module.exports = {
         jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
-        // console.log(servers, server);
+        console.log(servers);
       });
 
 
