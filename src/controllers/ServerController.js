@@ -101,7 +101,8 @@ module.exports = {
   },
 
   async showAllServers(req, res) {
-    const file = path.resolve(__dirname,"..","hosts.json");
+    const file = path.resolve(__dirname, "..", "storage/hosts.json");
+    console.log(file)
     const servers = await jsonfile.readFileSync(file);
     return res.json(servers)
   }
