@@ -4,7 +4,9 @@ const jsonfile = require("jsonfile");
 const moment = require("moment");
 const path = require("path")
 
-const file = "hosts.json";
+const file = path.resolve(__dirname, "storage/hosts.json");
+
+console.log(file)
 
 module.exports = {
   createWebSocketConnection(server) {
@@ -35,7 +37,16 @@ module.exports = {
       }
 
       socket.on("disconnect", async function(socket) {
-        const servers = await jsonfile.readFileSync(file);
+        console.log("server disconnected")
+        var servers = {};
+
+        jsonfile.readFile(file, function (err, obj) {
+          if (err) console.error(err)
+          servers = obj;
+        });
+
+        var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
+
         servers[server.server_id] = {
           server_id: server.server_id,
           server_name:  server.server_name,
@@ -47,13 +58,18 @@ module.exports = {
           isDisacommsOn: server.isDisacommsOn,
           updatedAt: updatedAt
         }
-        jsonfile.writeFile(file, servers, function (err) {
+        await fs.writeFileSync(file, JSON.stringify(servers, null, 2), function (err) {
           if (err) console.error(err)
         })
       })
 
       socket.on("osinfo", async function (server) {
-        const servers = await jsonfile.readFileSync(file);
+        var servers = {};
+
+        jsonfile.readFile(file, function (err, obj) {
+          if (err) console.error(err)
+          servers = obj;
+        })
         var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
         servers[server.server_id] = {
           server_id: server.server_id,
@@ -66,13 +82,10 @@ module.exports = {
           isDisacommsOn: server.isDisacommsOn,
           updatedAt: updatedAt
         }
-        await fs.writeFileSync(path.resolve(__dirname, "..", "hosts.json"), JSON.stringify(servers, null, 2), function (err) {
+        await fs.writeFileSync(file, JSON.stringify(servers, null, 2), function (err) {
           if (err) console.error(err)
         })
-        // await jsonfile.writeFile(file, servers, function (err) {
-        //   if (err) console.error(err)
-        // })
-        console.log("Servers: ", servers);
+        // console.log("Servers: ", servers);
       });
 
 

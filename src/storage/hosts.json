@@ -1,0 +1,13 @@
+{
+  "VP": {
+    "server_id": "VP",
+    "server_name": "Vagner's PC",
+    "server_category": "other",
+    "cpu": 93.84539635647464,
+    "ram": 6220103680,
+    "sqlagent": "Running.",
+    "isConnected": true,
+    "isDisacommsOn": true,
+    "updatedAt": "2021-02-23 14:23:48"
+  }
+}
