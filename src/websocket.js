@@ -68,7 +68,7 @@ module.exports = {
         await jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
-        console.log(servers);
+        console.log("Servers: ", servers);
       });
 
 
