@@ -65,7 +65,7 @@ module.exports = {
           isDisacommsOn: server.isDisacommsOn,
           updatedAt: updatedAt
         }
-        jsonfile.writeFile(file, servers, function (err) {
+        await jsonfile.writeFile(file, servers, function (err) {
           if (err) console.error(err)
         })
         console.log(servers);
