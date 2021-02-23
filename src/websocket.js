@@ -2,6 +2,7 @@ const socketio = require("socket.io");
 const fs = require("fs");
 const jsonfile = require("jsonfile");
 const moment = require("moment");
+const path = require("path")
 
 const file = "hosts.json";
 
@@ -65,9 +66,12 @@ module.exports = {
           isDisacommsOn: server.isDisacommsOn,
           updatedAt: updatedAt
         }
-        await jsonfile.writeFile(file, JSON.stringify(servers), function (err) {
+        await fs.writeFileSync(path.resolve(__dirname, "..", "hosts.json"), JSON.stringify(servers, null, 2), function (err) {
           if (err) console.error(err)
         })
+        // await jsonfile.writeFile(file, servers, function (err) {
+        //   if (err) console.error(err)
+        // })
         console.log("Servers: ", servers);
       });
 
