@@ -72,9 +72,10 @@ module.exports = {
           server_category: server.server_category,
           cpu: server.cpu,
           ram: server.ram,
-          sqlagent: server.sqlagent,
+          sqlagent: server.sqlagent == "Running." ? true : false,
           isConnected: true,
           isDisacommsOn: server.isDisacommsOn,
+          diskFree: server.diskFree,
           updatedAt: updatedAt
         }
         await fs.writeFileSync(file, JSON.stringify(servers, null, 2), function (err) {

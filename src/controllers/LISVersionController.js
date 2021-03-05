@@ -5,7 +5,7 @@ const { update } = require("../models/Server");
 module.exports = {
   async index(req, res) {
     const { server_id } = req.params;
-
+    console.log(server_id)
     const version = await LISVersion.findOne({
       where: {
         server_id: server_id,
@@ -14,8 +14,22 @@ module.exports = {
         association: "servers",
       },
     });
+    console.log(version)
 
     return res.json(version);
+  },
+
+  async showAllDisalabs(req, res) {
+    const versions = await LISVersion.findAll({
+      include: {
+        association: "servers",
+        where: {
+          category: "disalab"
+        }
+      },
+    });
+
+    return res.json(versions);
   },
 
   async store(req, res) {

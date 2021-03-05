@@ -1,15 +1,12 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Server extends Model {
+class Category extends Model {
   static init(sequelize) {
     super.init(
       {
         id: { type: DataTypes.STRING, primaryKey: true },
         name: DataTypes.STRING,
-        category: DataTypes.STRING,
-        cpu: DataTypes.STRING,
-        ram: DataTypes.FLOAT,
-        disk_storage: DataTypes.FLOAT,
+        description: DataTypes.TEXT,
         created_at: {
           type: DataTypes.DATE,
           defaultValue: DataTypes.NOW,
@@ -24,13 +21,12 @@ class Server extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Data, { foreignKey: "server_id", as: "data" });
-    this.belongsToMany(models.Category, {
-      foreignKey: "category_id",
+    this.belongsToMany(models.Server, {
+      foreignKey: "server_id",
       through: "server_categories",
-      as: "categories",
+      as: "servers",
     });
   }
 }
 
-module.exports = Server;
+module.exports = Category;

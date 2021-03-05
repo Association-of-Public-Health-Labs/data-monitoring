@@ -1,6 +1,7 @@
 const Server = require("../models/Server");
 const Data = require("../models/Data");
-const { upsert } = require("../models/Server");
+const Category = require("../models/Category"); 
+const {Op} = require("sequelize");
 
 const jsonfile = require("jsonfile")
 const path = require("path")
@@ -11,8 +12,7 @@ module.exports = {
     const { id, name, category, cpu, ram } = req.body;
 
     var server = await Server.findByPk(id);
-    console.log("Server ID: ", id);
-
+    
     if (server) {
       return res.json({ error: "This server exists" });
     }
@@ -32,6 +32,17 @@ module.exports = {
     const server = await Server.findAll();
 
     return res.json(server);
+  },
+
+  async showByCategory(req, res) {
+    const {category} = req.params;
+    const servers = await Server.findAll({
+      where: {
+        ...(category != "all" && {category: category})
+      }
+    });
+
+    return res.json(servers);
   },
 
   async update(req, res) {

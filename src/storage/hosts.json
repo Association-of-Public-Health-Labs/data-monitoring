@@ -3,11 +3,12 @@
     "server_id": "VP",
     "server_name": "Vagner's PC",
     "server_category": "other",
-    "cpu": 49.800796812749006,
-    "ram": 6367543296,
-    "sqlagent": "Running.",
+    "cpu": 100,
+    "ram": 7445626880,
+    "sqlagent": true,
     "isConnected": true,
     "isDisacommsOn": true,
-    "updatedAt": "2021-02-23 14:33:02"
+    "diskFree": 1570582528,
+    "updatedAt": "2021-03-05 12:41:13"
   }
 }

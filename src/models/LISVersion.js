@@ -10,6 +10,7 @@ class LISVersion extends Model {
         wxdict: DataTypes.STRING,
         wxdisa: DataTypes.STRING,
         wxinstrument: DataTypes.STRING,
+        sqlserver: DataTypes.TEXT,
         created_at: {
           type: DataTypes.DATE,
           defaultValue: DataTypes.NOW,

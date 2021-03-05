@@ -1,8 +1,8 @@
 const Data = require("../models/Data");
 const Server = require("../models/Server");
-const { update } = require("../models/Server");
+const ViralLoad = require("../models/ViralLoad");
 const moment = require("moment");
-const { Op, literal } = require("sequelize");
+const { Op, literal, col } = require("sequelize");
 
 module.exports = {
   async store(req, res) {
@@ -101,4 +101,27 @@ module.exports = {
     );
     return res.json(data);
   },
+
+  async showVLReportByMonth(req, res){
+    const {paginate, page} = req.params;
+    const { docs, pages, total } = await ViralLoad.paginate({
+      page: parseInt(page),
+      paginate: parseInt(paginate),
+      order: [[col("year"), "DESC"], [col("month_id"), "DESC"], [col("LabName"), "ASC"]]
+    });
+    return res.json({ docs, pages, total });
+  },
+
+  async showVLReportByLab(req, res){
+    const {lab_code, paginate, page} = req.params;
+    const { docs, pages, total } = await ViralLoad.paginate({
+      where: {
+        LabCode: lab_code,
+      },
+      order: [[col("year"), "DESC"], [col("month_id"), "DESC"]],
+      page: parseInt(page),
+      paginate: parseInt(paginate)
+    })
+    return res.json({ docs, pages, total });
+  }
 };
