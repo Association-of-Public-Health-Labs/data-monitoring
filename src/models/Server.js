@@ -10,6 +10,12 @@ class Server extends Model {
         cpu: DataTypes.STRING,
         ram: DataTypes.FLOAT,
         disk_storage: DataTypes.FLOAT,
+        cpu_usage: DataTypes.FLOAT, 
+        is_disacomms_on: DataTypes.BOOLEAN, 
+        disk_usage: DataTypes.FLOAT, 
+        ram_usage: DataTypes.FLOAT, 
+        is_connected: DataTypes.BOOLEAN, 
+        sqlagent: DataTypes.BOOLEAN,
         created_at: {
           type: DataTypes.DATE,
           defaultValue: DataTypes.NOW,
@@ -19,7 +25,7 @@ class Server extends Model {
           defaultValue: DataTypes.NOW,
         },
       },
-      { sequelize, timestamps: false, underscored: true }
+      { sequelize, timestamps: true, underscored: true }
     );
   }
 

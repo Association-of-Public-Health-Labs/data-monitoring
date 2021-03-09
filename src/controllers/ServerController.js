@@ -118,19 +118,9 @@ module.exports = {
     return res.json(servers)
   },
 
-  async update_usage(req, res) {
-    const { server_id } = req.params;
-    const { cpu_usage, is_disacomms_on, disk_usage, ram_usage, is_connected, sqlagent } = req.body;
-
+  async update_usage(server_id, data) {
     const server = await Server.update(
-      {
-        cpu_usage, 
-        is_disacomms_on, 
-        disk_usage, 
-        ram_usage, 
-        is_connected, 
-        sqlagent
-      },
+      data,
       {
         where: {
           id: server_id,
@@ -138,6 +128,6 @@ module.exports = {
       }
     );
 
-    return res.json(server);
+    return server;
   },
 };
