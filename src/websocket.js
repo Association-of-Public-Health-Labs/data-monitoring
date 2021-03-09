@@ -26,6 +26,10 @@ module.exports = {
       const osinfo = [];
 
       console.log(socket.id, server_id)
+      
+      await ServerController.update_usage(server_id, {
+        is_connected: true,
+      })
 
       if (server_id) {
         connectedServers[server_id] = socket.id;
@@ -41,59 +45,10 @@ module.exports = {
         await ServerController.update_usage(server_id, {
           is_connected: false,
         })
-        // console.log("server disconnected")
-        // var servers = {};
-
-        // jsonfile.readFile(file, function (err, obj) {
-        //   if (err) console.error(err)
-        //   servers = obj;
-        // });
-
-        // var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
-
-        // servers[server_id] = {
-        //   ...servers[server_id],
-        //   isConnected: false,
-        //   updatedAt: updatedAt
-        // }
-
-        // await fs.writeFileSync(file, JSON.stringify(servers, null, 2), function (err) {
-        //   if (err) console.error(err)
-        // })
       })
 
       socket.on("osinfo", async function (server) {
-        // var servers = {};
-
-        // jsonfile.readFile(file, function (err, obj) {
-        //   if (err) console.error(err)
-        //   servers = obj;
-        // })
-        // var updatedAt = moment().format("YYYY-MM-DD HH:mm:ss");
-        // servers[server.server_id] = {
-          // server_id: server.server_id,
-          // server_name:  server.server_name,
-          // server_category: server.server_category,
-          // cpu: server.cpu,
-          // ram: server.ram,
-          // sqlagent: server.sqlagent == "Running." ? true : false,
-          // isConnected: true,
-          // isDisacommsOn: server.isDisacommsOn,
-          // diskFree: server.diskFree,
-        //   updatedAt: updatedAt
-        // }
-        // await fs.writeFileSync(file, JSON.stringify(servers, null, 2), function (err) {
-        //   if (err) console.error(err)
-        // })
-
-        await ServerController.update_usage(server_id, {
-          cpu_usage: server.cpu,
-          ram_usage: server.ram,
-          sqlagent: server.sqlagent == "Running." ? true : false,
-          is_connected: true,
-          is_disacomms_on: server.isDisacommsOn,
-        })
-
+        io.emit("osinfo", server)
       });
 
 
