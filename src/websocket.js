@@ -48,12 +48,12 @@ module.exports = {
 
         io.emit("osinfo", {
           server_id: server_id,
-          isConnected: false
+          is_connected: false
         });
       })
 
       socket.on("osinfo", async function (server) {
-        io.emit("osinfo", server)
+        io.emit("osinfo", {...server, is_connected: true})
       });
 
 
