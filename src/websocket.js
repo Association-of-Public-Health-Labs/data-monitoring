@@ -45,6 +45,11 @@ module.exports = {
         await ServerController.update_usage(server_id, {
           is_connected: false,
         })
+
+        io.emit("osinfo", {
+          server_id: server_id,
+          isConnected: false
+        });
       })
 
       socket.on("osinfo", async function (server) {
