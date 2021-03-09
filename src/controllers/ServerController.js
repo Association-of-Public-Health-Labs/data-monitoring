@@ -116,5 +116,28 @@ module.exports = {
     console.log(file)
     const servers = await jsonfile.readFileSync(file);
     return res.json(servers)
-  }
+  },
+
+  async update_usage(req, res) {
+    const { server_id } = req.params;
+    const { cpu_usage, is_disacomms_on, disk_usage, ram_usage, is_connected, sqlagent } = req.body;
+
+    const server = await Server.update(
+      {
+        cpu_usage, 
+        is_disacomms_on, 
+        disk_usage, 
+        ram_usage, 
+        is_connected, 
+        sqlagent
+      },
+      {
+        where: {
+          id: server_id,
+        },
+      }
+    );
+
+    return res.json(server);
+  },
 };
