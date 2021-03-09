@@ -46,7 +46,7 @@ module.exports = {
           is_connected: false,
         })
 
-        io.emit("osinfo", {
+        io.emit("ondisconnect", {
           server_id: server_id,
           is_connected: false
         });
