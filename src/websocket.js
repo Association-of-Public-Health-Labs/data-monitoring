@@ -54,6 +54,7 @@ module.exports = {
 
       socket.on("osinfo", async function (server) {
         io.emit("osinfo", {...server, is_connected: true})
+        console.log(server)
       });
 
 

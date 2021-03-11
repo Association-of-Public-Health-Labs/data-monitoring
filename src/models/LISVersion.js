@@ -23,7 +23,7 @@ class LISVersion extends Model {
       {
         sequelize,
         underscored: true,
-        timestamps: false,
+        timestamps: true,
         tableName: "lis_versions",
       }
     );
