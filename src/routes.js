@@ -16,6 +16,7 @@ routes.delete("/servers/:server_id", ServerController.delete);
 routes.post("/servers/:server_id", ServerController.upsert);
 routes.post("/server/usage/:server_id", ServerController.update_usage);
 routes.get("/status", ServerController.showAllServers)
+routes.get("/facility/:facility_code", ServerController.getFacility)
 
 // Data routes
 routes.post("/servers/:server_id/data", DataController.store);

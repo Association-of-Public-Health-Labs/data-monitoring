@@ -2,6 +2,7 @@ const Server = require("../models/Server");
 const Data = require("../models/Data");
 const Category = require("../models/Category"); 
 const {Op} = require("sequelize");
+const api = require("../config/api");
 
 const jsonfile = require("jsonfile")
 const path = require("path")
@@ -130,4 +131,12 @@ module.exports = {
 
     return server;
   },
+
+  async getFacility(req, res) {
+    const {facility_code} = req.params;
+
+    const response = await api.get(`clinic/${facility_code}`)
+
+    return res.json(response.data);
+  }
 };
