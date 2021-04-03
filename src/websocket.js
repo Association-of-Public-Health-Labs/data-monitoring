@@ -5,9 +5,9 @@ const moment = require("moment");
 const path = require("path")
 const ServerController = require("./controllers/ServerController")
 
-const file = path.resolve(__dirname, "storage/hosts.json");
+// const file = path.resolve(__dirname, "storage/hosts.json");
 
-console.log(file)
+// console.log(file)
 
 module.exports = {
   createWebSocketConnection(server) {
