@@ -54,7 +54,8 @@ module.exports = {
     });
 
     if (!version_updated) {
-      return await LISVersion.create(req.body);
+      const vrs = await LISVersion.create(req.body);
+      return res.json(vrs)
     }
 
     const version = await LISVersion.update(req.body, {
